@@ -23,8 +23,7 @@ const int BITES_PER_PHILOSOPHER = 5;
 void philosopher(int id) {
     int left = id;
     int right = (id + 1) % 5;
-
-    for (int bite = 1; bite <= BITES_PER_PHILOSOPHER; bite++) {
+ {
         // Think
         {
             std::lock_guard<std::mutex> lock(coutMutex);
@@ -68,7 +67,7 @@ void philosopher(int id) {
         }
 
         // Eat
-        {
+        for (int bite = 0; bite < BITES_PER_PHILOSOPHER; bite++) {
             std::lock_guard<std::mutex> lock(coutMutex);
             std::cout << "Philosopher " << id << " eating (bite " << bite << "/" << BITES_PER_PHILOSOPHER << ")\n";
         }
