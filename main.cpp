@@ -33,20 +33,38 @@ void philosopher(int id) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         // Get hungry, pick up LEFT chopstick first
-        chopsticks[left].lock();
-        {
-            std::lock_guard<std::mutex> lock(coutMutex);
-            std::cout << "Philosopher " << id << " picked up left chopstick (C" << left << ")\n";
-        }
+        if (id == 4) {
+            chopsticks[right].lock();
+            {
+                std::lock_guard<std::mutex> lock(coutMutex);
+                std::cout << "Philosopher " << id << " picked up right chopstick (C" << right << ")\n";
+            }
 
-        // Small delay makes deadlock more likely to occur
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            // Small delay makes deadlock more likely to occur
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
-        // Try to pick up RIGHT chopstick - THIS IS WHERE WE GET STUCK
-        chopsticks[right].lock();
-        {
-            std::lock_guard<std::mutex> lock(coutMutex);
-            std::cout << "Philosopher " << id << " picked up right chopstick (C" << right << ")\n";
+            // Try to pick up RIGHT chopstick - THIS IS WHERE WE GET STUCK
+            chopsticks[left].lock();
+            {
+                std::lock_guard<std::mutex> lock(coutMutex);
+                std::cout << "Philosopher " << id << " picked up left chopstick (C" << left << ")\n";
+            }
+        } else {
+            chopsticks[left].lock();
+            {
+                std::lock_guard<std::mutex> lock(coutMutex);
+                std::cout << "Philosopher " << id << " picked up left chopstick (C" << left << ")\n";
+            }
+
+            // Small delay makes deadlock more likely to occur
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+            // Try to pick up RIGHT chopstick - THIS IS WHERE WE GET STUCK
+            chopsticks[right].lock();
+            {
+                std::lock_guard<std::mutex> lock(coutMutex);
+                std::cout << "Philosopher " << id << " picked up right chopstick (C" << right << ")\n";
+            }
         }
 
         // Eat
