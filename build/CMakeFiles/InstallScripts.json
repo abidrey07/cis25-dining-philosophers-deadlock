@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/abid/CLionProjects/cis25-dining-philosophers-deadlock/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

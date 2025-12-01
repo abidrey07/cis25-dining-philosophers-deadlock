@@ -1,0 +1,3 @@
+/Users/abid/CLionProjects/cis25-dining-philosophers-deadlock/build/CMakeFiles/philosophers.dir
+/Users/abid/CLionProjects/cis25-dining-philosophers-deadlock/build/CMakeFiles/edit_cache.dir
+/Users/abid/CLionProjects/cis25-dining-philosophers-deadlock/build/CMakeFiles/rebuild_cache.dir
